@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "world-cup-info"
+version = "0.1.0"
+description = ""
+authors = ["iobami <ayobamialadenoye@yahoo.com>"]
+readme = "README.md"
+packages = [{include = "world_cup_info"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

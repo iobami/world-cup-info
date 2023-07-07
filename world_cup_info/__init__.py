@@ -10,5 +10,6 @@ response = fetch_fixtures(url)
 if LOCAL_ENV: #TODO:: error handling
   data = read_file_to_data(file_name)
   group_teams(data)
+  print('group_teams(data):: -)')
 else:
   write_data_to_file(response, file_name)

@@ -2,6 +2,7 @@ import json
 import os
 
 from dotenv import load_dotenv
+from utils.validators import AllMatchesStatistics
 from utils import fetch_fixtures, write_data_to_file, read_file_to_data, group_teams
 
 load_dotenv()
@@ -18,7 +19,10 @@ def print_groups(data: dict):
   if data:
     write_data_to_file(data, file_name) if LOCAL_ENV else None
 
-    groups = group_teams(data)
+    # validate data
+    validated_data = AllMatchesStatistics(data=data).data
+
+    groups = group_teams(validated_data)
     print(json.dumps(groups['Group A']['team_standings']))
     print('group_teams(data):: -)')
   else:

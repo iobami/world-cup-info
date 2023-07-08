@@ -20,11 +20,8 @@ def write_data_to_file(data: dict, file_name: str) -> None:
     print("[Error]: unable to create file")
     
 def read_file_to_data(file_name: str) -> dict:
-  try:
-    file = open(f"./{file_name}")
-    return json.load(file)
-  except:
-    return None
+  file = open(f"./{file_name}")
+  return json.load(file)
 
 def group_teams(data: dict) -> dict:
   groups = reduce(group_reducer, data, {})

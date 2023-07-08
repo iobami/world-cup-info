@@ -69,3 +69,27 @@ def get_team_standings(next_state: dict, current_match: dict) -> dict:
     current_team_standings[away_team] = get_team_stats({ 'country': away_team, 'goals_scored': away_team_score, 'goals_conceded': home_team_score })
 
   return current_team_standings
+
+def group_reducer(prev, current) -> dict: #TODO:: error handling
+  next_state = prev
+
+  if current['Group']:
+    group_name = current['Group']
+
+    group_exists_in_next_state = next_state[group_name] if group_name in next_state else None
+    group_games = [*group_exists_in_next_state['group_games'], current] if group_exists_in_next_state else [current]
+
+    team_standings_exists_in_next_state = next_state[group_name]['team_standings'] if group_exists_in_next_state and 'team_standings' in next_state[group_name] else None
+    new_team_standings = get_team_standings(team_standings_exists_in_next_state, current)
+    team_standings = { **team_standings_exists_in_next_state, **new_team_standings } if team_standings_exists_in_next_state else new_team_standings
+
+    next_state[group_name] = { 'group_games': group_games, 'team_standings': team_standings }
+  else:
+    next_stage_name = 'knockout_stage'
+
+    group_exists_in_next_state = next_state[next_stage_name] if next_stage_name in next_state else None
+    knockout_stage = [*group_exists_in_next_state, current] if group_exists_in_next_state else [current]
+    
+    next_state = { **next_state, next_stage_name: knockout_stage }
+
+  return next_state

@@ -23,7 +23,8 @@ def print_groups(data: dict):
     validated_data = AllMatchesStatistics(data=data).data
 
     groups = group_teams(validated_data)
-    print(json.dumps(groups['Group A']['team_standings']))
+    # print(json.dumps(groups['Group A']['team_standings']))
+    print(json.dumps(groups['team_standings']))
     print('group_teams(data):: -)')
   else:
     print(error_message)

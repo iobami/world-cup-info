@@ -28,7 +28,7 @@ def get_team_stats(data: dict) -> dict:
     "draws": draw,
     "goals_scored": gs,
     "goals_conceded": gc,
-    "goal_difference": gd,
+    "goals_difference": gd,
     "points": points
   }
 
@@ -36,13 +36,14 @@ def get_team_stats(data: dict) -> dict:
 
 def update_team_stats(previous_team_stats: dict, team_stats: dict) -> dict:
   return {
+    'country': previous_team_stats['country'],
     'played': previous_team_stats['played'] + team_stats['played'],
     'wins': previous_team_stats['wins'] + team_stats['wins'],
     'loses': previous_team_stats['loses'] + team_stats['loses'],
     'draws': previous_team_stats['draws'] + team_stats['draws'],
     'goals_scored': previous_team_stats['goals_scored'] + team_stats['goals_scored'],
     'goals_conceded': previous_team_stats['goals_conceded'] + team_stats['goals_conceded'],
-    'goal_difference': previous_team_stats['goal_difference'] + team_stats['goal_difference'],
+    'goals_difference': previous_team_stats['goals_difference'] + team_stats['goals_difference'],
     'points': previous_team_stats['points'] + team_stats['points']
   }
 
